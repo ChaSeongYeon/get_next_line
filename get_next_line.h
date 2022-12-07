@@ -6,7 +6,7 @@
 /*   By: seocha <seocha@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 10:29:52 by seocha            #+#    #+#             */
-/*   Updated: 2022/11/30 15:04:20 by seocha           ###   ########.fr       */
+/*   Updated: 2022/12/02 11:39:51 by seocha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <unistd.h>
 # include <stdlib.h>
+# include <limits.h>
 
 /*get_next_line_utils function*/
 char	*ft_strdup(const char *s1);

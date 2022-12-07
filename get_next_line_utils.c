@@ -6,7 +6,7 @@
 /*   By: seocha <seocha@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 10:29:37 by seocha            #+#    #+#             */
-/*   Updated: 2022/12/02 08:36:48 by seocha           ###   ########.fr       */
+/*   Updated: 2022/12/02 11:25:38 by seocha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,6 @@ char	*ft_strdup(const char *s1)
 
 	i = 0;
 	len = 0;
-	if (!s1)
-		return (0);
 	while (s1[len])
 		len++;
 	new_src = (char *)malloc(sizeof(char) * (len + 1));

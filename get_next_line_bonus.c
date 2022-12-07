@@ -6,7 +6,7 @@
 /*   By: seocha <seocha@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 15:42:02 by seocha            #+#    #+#             */
-/*   Updated: 2022/12/02 09:10:08 by seocha           ###   ########.fr       */
+/*   Updated: 2022/12/02 16:45:48 by seocha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ int	ft_read_line(int fd, char *buff, char **backup)
 	char	*temp;
 
 	flag = 1;
+	if (!*backup)
+		return (-2);
 	while (!ft_strchr(*backup, '\n') && flag)
 	{
 		flag = read(fd, buff, BUFFER_SIZE);
@@ -26,6 +28,8 @@ int	ft_read_line(int fd, char *buff, char **backup)
 		buff[flag] = '\0';
 		temp = *backup;
 		*backup = ft_strjoin(temp, buff);
+		if (!*backup)
+			return (-2);
 		free(temp);
 	}
 	return (flag);
@@ -38,12 +42,6 @@ char	*ft_extract_line(char **backup)
 	char	*temp;
 
 	idx = 0;
-	if (!**backup)
-	{
-		free(*backup);
-		*backup = NULL;
-		return (NULL);
-	}
 	while ((*backup)[idx] != '\n')
 		idx++;
 	temp = *backup;
@@ -59,6 +57,8 @@ char	*ft_get_line(int fd, char *buff, char **backup)
 	char	*line;
 
 	flag = ft_read_line(fd, buff, backup);
+	if (flag == -2)
+		return (NULL);
 	if (!**backup || flag == -1)
 	{
 		free(*backup);
@@ -77,9 +77,9 @@ char	*get_next_line(int fd)
 {
 	char		*line;
 	char		*buff;
-	static char	*backup[2147483648];
+	static char	*backup[OPEN_MAX];
 
-	if (fd < 0 || BUFFER_SIZE <= 0)
+	if (fd < 0 || fd > OPEN_MAX || BUFFER_SIZE <= 0)
 		return (NULL);
 	buff = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
 	if (!buff)
